@@ -1,0 +1,21 @@
+<form class="form-horizantal"
+    ng-controller="LeaguesController"
+    ng-submit="create()">
+    
+    <div class="control-group">
+        <label class="control-label" for="name">Name</label>
+        <div class="controls">
+            <input type="text" 
+                id="name"
+                ng-model="league.name"
+                placeholder="Name">
+        </div>
+    </div>
+    
+    <div class="control-group">
+        <div class="controls">
+            <input type="submit" 
+                class="btn" >
+        </div>
+    </div>
+</form>
