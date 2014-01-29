@@ -15,6 +15,15 @@ module.exports = function (app, passport, auth) {
   
   app.param('userId', users.user)
   
+  var leagues = require('../app/controllers/league')
+  app.get('/leagues', leagues.all)
+  app.post('/leagues', auth.requiresLogin, leagues.create)
+  app.get('/leagues/:leagueId', leagues.show)
+  app.put('leagues/:leagueId', auth.requiresLogin, leagues.update)
+  app.del('leagues/:leagueId', auth.requiresLogin, leagues.destory)
+  
+  app.param('leagueId', leagues.league)
+  
   // home route
   var index = require('../app/controllers/index')
   app.get('/', index.render)
