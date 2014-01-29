@@ -1,5 +1,18 @@
 //Setting up route
 window.app.config(['$routeProvider', function($routeProvider) {
+  
+  function blankObject($q){ 
+    return $q.when({});
+  }
+  
+  function findLeague(Leagues, $route) {
+    return Leagues.get({ leagueId: $route.current.params.leagueId }).$promise;
+  }
+  
+  function findLeagues(Leagues){
+    var query = undefined;//not needed?
+    return Leagues.query(query).$promise;
+  }
 	
   $routeProvider.when('/', {
     templateUrl : 'views/index.html'
@@ -12,21 +25,39 @@ window.app.config(['$routeProvider', function($routeProvider) {
   })
   
   //leagues
-  .when('/leagues', 
+  .when('/leagues',
   { 
-    templateUrl: 'views/leagues/list.html' 
+    templateUrl: 'views/leagues/list.html',
+    controller: function($scope, leagues){
+      $scope.leagues = leagues;
+      $scope.destroy = function(league){
+        league.$remove();
+        for(var i in $scope.league){
+          if ($scope.leagues[i] == league){
+            $scope.leagues.splice(i, 1);
+          }        
+        }
+      };
+    },
+    resolve: { leagues: findLeagues }
   })
   .when('/leagues/create', 
   { 
-    templateUrl: 'views/leagues/create.html' 
+    templateUrl: 'views/leagues/create.html',
+    controller: 'LeagueController',
+    resolve: { league: blankObject }
   })  
   .when('/leagues/:leagueId/edit', 
   { 
-    templateUrl: 'views/leagues/edit.html' 
+    templateUrl: 'views/leagues/edit.html',
+    controller: 'LeagueController',
+    resolve: { league: findLeague }
   })
   .when('/leagues/:leagueId', 
   { 
-    templateUrl: 'views/leagues/view.html' 
+    templateUrl: 'views/leagues/view.html',
+    controller: 'LeagueController',
+    resolve: { league: findLeague }
   })
   
   //fantasy teams
