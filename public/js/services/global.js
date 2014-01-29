@@ -1,5 +1,12 @@
 window.angular.module('ngff.services.global', [])
   .factory('Global', function() {
     var current_user = window.user;
-    return current_user;
+    return {
+        currentUser: function(){
+            return current_user;
+        },
+        isSignedIn: function(){
+            return !angular.isUndefined(current_user);
+        }
+    };
   });
