@@ -33,7 +33,7 @@ window.angular.module('ngff.controllers.leagues', [])
       });
     };
     
-    $scope.destory = function(league){
+    $scope.destroy = function(league){
       league.$remove();
       for(var i in $scope.league){
         if ($scope.leagues[i] == league){
