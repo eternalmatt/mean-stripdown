@@ -1,6 +1,7 @@
 window.angular.module('ngff.services.nfl', [])
   .factory('NFL', function(){
-    var NFL = [       
+    var NFL = {};
+    NFL.teams = [       
       {"abbr":"ARI", "team":"Arizona", "mascot": "Cardinals", "conference":"NFC", "division": "West"},
       {"abbr":"ATL", "team":"Atlanta", "mascot": "Falcons", "conference":"NFC", "division": "South"},
       {"abbr":"BAL", "team":"Baltimore", "mascot": "Ravens", "conference":"AFC", "division": "North"},
