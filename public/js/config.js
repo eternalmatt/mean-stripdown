@@ -24,21 +24,12 @@ window.app.config(['$routeProvider', function($routeProvider) {
     templateUrl: 'views/nfl/view.html'
   })
   
-  //leagues
+  // leagues routes
+  // subtle differences of "League" and "Leagues"
   .when('/leagues',
   { 
     templateUrl: 'views/leagues/list.html',
-    controller: function($scope, leagues){
-      $scope.leagues = leagues;
-      $scope.destroy = function(league){
-        league.$remove();
-        for(var i in $scope.league){
-          if ($scope.leagues[i] == league){
-            $scope.leagues.splice(i, 1);
-          }        
-        }
-      };
-    },
+    controller: 'LeaguesController',
     resolve: { leagues: findLeagues }
   })
   .when('/leagues/create', 
@@ -60,7 +51,7 @@ window.app.config(['$routeProvider', function($routeProvider) {
     resolve: { league: findLeague }
   })
   
-  //fantasy teams
+  // fantasy teams routes
   .when('/fantasyteams', 
   { 
     templateUrl: 'views/fantasyteams/list.html' 
@@ -69,11 +60,11 @@ window.app.config(['$routeProvider', function($routeProvider) {
   { 
     templateUrl: 'views/fantasyteams/create.html' 
   })  
-  .when('/fantasyteams/:leagueId/edit', 
+  .when('/fantasyteams/:fantasyTeamId/edit', 
   { 
     templateUrl: 'views/fantasyteams/edit.html' 
   })
-  .when('/fantasyteams/:leagueId', 
+  .when('/fantasyteams/:fantasyTeamId', 
   { 
     templateUrl: 'views/fantasyteams/view.html' 
   })

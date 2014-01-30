@@ -1,4 +1,4 @@
-window.angular.module('ngff.controllers.leagues', [])
+window.angular.module('ngff.controllers.league', [])
   .controller('LeagueController', function($scope, $location, Leagues, league){
     $scope.league = league;
     
