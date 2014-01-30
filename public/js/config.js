@@ -36,19 +36,44 @@ window.app.config(['$routeProvider', function($routeProvider) {
   { 
     templateUrl: 'views/leagues/create.html',
     controller: 'LeagueController',
-    resolve: { league: blankObject }
+    resolve: { 
+      league: blankObject, 
+      save: function save(Leagues, $location){
+        return function create(league){
+  
+          var leagueRecord = new Leagues({ name: league.name });
+          leagueRecord.$save(function(response){
+            $location.path("leagues/" + response._id);
+          });
+  
+          league.name = "";
+        };
+      }
+    }
   })  
   .when('/leagues/:leagueId/edit', 
   { 
-    templateUrl: 'views/leagues/edit.html',
+    templateUrl: 'views/leagues/create.html',
     controller: 'LeagueController',
-    resolve: { league: findLeague }
+    resolve: { 
+      league: findLeague, 
+      save: function save($location){
+        return function update(league){
+          league.$update(function(){
+            $location.path('leagues/' + league._id);  
+          });
+        };
+      }
+    }
   })
   .when('/leagues/:leagueId', 
   { 
     templateUrl: 'views/leagues/view.html',
     controller: 'LeagueController',
-    resolve: { league: findLeague }
+    resolve: { 
+      league: findLeague,
+      save: blankObject
+    }
   })
   
   // fantasy teams routes
