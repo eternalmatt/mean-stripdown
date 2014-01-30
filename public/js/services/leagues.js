@@ -6,21 +6,21 @@ window.angular.module('ngff.services.leagues', [])
     );
   })
   
-  .factory('LeagueCreator', function LeagueCreator($location, Leagues){
+  .factory('LeagueCreator', function LeagueCreator($q, Leagues){
     return function create(league){
+      var deferred = $q.defer();
       var leagueRecord = new Leagues({ name: league.name });
-      leagueRecord.$save(function(response){
-        $location.path("leagues/" + response._id);
-      });
+      leagueRecord.$save(deferred.resolve);
 
       league.name = "";
+      return deferred.promise;
     };
   })
   
-  .factory('LeagueUpdater', function LeagueUpdater($location){
+  .factory('LeagueUpdater', function LeagueUpdater($q){
     return function update(league){
-      league.$update(function(){
-        $location.path('leagues/' + league._id);  
-      });
+      var deferred = $q.defer();
+      league.$update(deferred.resolve);
+      return deferred.promise;
     };
   })
