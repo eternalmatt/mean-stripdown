@@ -1,8 +1,8 @@
 //Setting up route
 window.app.config(['$routeProvider', function($routeProvider) {
   
-  function blankObject($q){ 
-    return $q.when({});
+  function blankObject(){ 
+    return {};
   }
   
   function findLeague(Leagues, $route) {
@@ -38,17 +38,7 @@ window.app.config(['$routeProvider', function($routeProvider) {
     controller: 'LeagueController',
     resolve: { 
       league: blankObject, 
-      save: function save(Leagues, $location){
-        return function create(league){
-  
-          var leagueRecord = new Leagues({ name: league.name });
-          leagueRecord.$save(function(response){
-            $location.path("leagues/" + response._id);
-          });
-  
-          league.name = "";
-        };
-      }
+      save: 'LeagueCreator'
     }
   })  
   .when('/leagues/:leagueId/edit', 
@@ -57,13 +47,7 @@ window.app.config(['$routeProvider', function($routeProvider) {
     controller: 'LeagueController',
     resolve: { 
       league: findLeague, 
-      save: function save($location){
-        return function update(league){
-          league.$update(function(){
-            $location.path('leagues/' + league._id);  
-          });
-        };
-      }
+      save: 'LeagueUpdater'
     }
   })
   .when('/leagues/:leagueId', 
