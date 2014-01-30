@@ -9,7 +9,7 @@ window.angular.module('ngff.controllers.fantasyTeams', [])
     };
     
     $scope.create = function(){
-      var fantasyteam = new FantasyTeam({
+      var fantasyteam = new FantasyTeams({
         league: this.fantasyteam.league,
         name: this.fantasyteam.name,
         players: this.players

@@ -54,19 +54,23 @@ window.app.config(['$routeProvider', function($routeProvider) {
   // fantasy teams routes
   .when('/fantasyteams', 
   { 
-    templateUrl: 'views/fantasyteams/list.html' 
+    templateUrl: 'views/fantasyteams/list.html',
+    controller: 'FantasyTeamsController'
   })
   .when('/fantasyteams/create', 
   { 
-    templateUrl: 'views/fantasyteams/create.html' 
+    templateUrl: 'views/fantasyteams/create.html',
+    controller: 'FantasyTeamsController'
   })  
   .when('/fantasyteams/:fantasyTeamId/edit', 
   { 
-    templateUrl: 'views/fantasyteams/edit.html' 
+    templateUrl: 'views/fantasyteams/edit.html',
+    controller: 'FantasyTeamsController'
   })
   .when('/fantasyteams/:fantasyTeamId', 
   { 
-    templateUrl: 'views/fantasyteams/view.html' 
+    templateUrl: 'views/fantasyteams/view.html',
+    controller: 'FantasyTeamsController'
   })
   
   
