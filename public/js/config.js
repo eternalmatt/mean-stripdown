@@ -13,6 +13,15 @@ window.app.config(['$routeProvider', function($routeProvider) {
     var query = undefined;//not needed?
     return Leagues.query(query).$promise;
   }
+  
+  function findFantasyTeam(FantasyTeams, $route){
+    return FantasyTeams.get({fantasyTeamId: $route.current.params.fantasyTeamId }).$promise;
+  };
+  
+  function findFantasyTeams(FantasyTeams){
+    return FantasyTeams.query().$promise;
+  };
+  
 	
   $routeProvider.when('/', {
     templateUrl : 'views/index.html'
@@ -64,25 +73,37 @@ window.app.config(['$routeProvider', function($routeProvider) {
   .when('/fantasyteams', 
   { 
     templateUrl: 'views/fantasyteams/list.html',
-    controller: 'FantasyTeamsController'
+    controller: 'FantasyTeamsController',
+    resolve: { fantasyteams: findFantasyTeams }
   })
   .when('/fantasyteams/create', 
   { 
     templateUrl: 'views/fantasyteams/create.html',
-    controller: 'FantasyTeamsController'
+    controller: 'FantasyTeamController',
+    resolve: { 
+      fantasyteam: blankObject, 
+      save: 'FantasyTeamCreator'
+    }
   })  
   .when('/fantasyteams/:fantasyTeamId/edit', 
   { 
     templateUrl: 'views/fantasyteams/edit.html',
-    controller: 'FantasyTeamsController'
+    controller: 'FantasyTeamController',
+    resolve: { 
+      fantasyteam: findFantasyTeam, 
+      save: 'FantasyTeamUpdater'
+    }
   })
   .when('/fantasyteams/:fantasyTeamId', 
   { 
     templateUrl: 'views/fantasyteams/view.html',
-    controller: 'FantasyTeamsController'
+    controller: 'FantasyTeamController',
+    resolve: { 
+      fantasyteam: findFantasyTeam, 
+      save: blankObject
+    }
   })
-  
-  
+
   .otherwise({
     redirectTo : '/'
   }); 
