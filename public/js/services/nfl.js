@@ -1,7 +1,13 @@
 window.angular.module('ngff.services.nfl', [])
-  .factory('NFL', function(){
-    var NFL = {};
-    NFL.teams = [       
+  .factory('NFL', function(NFLTeams, NFLPositions){
+    var NFL = { 
+      teams: NFLTeams,
+      positions: NFLPositions
+    };
+    return NFL;
+  })
+  
+  .constant('NFLTeams', [       
       {"abbr":"ARI", "team":"Arizona", "mascot": "Cardinals", "conference":"NFC", "division": "West"},
       {"abbr":"ATL", "team":"Atlanta", "mascot": "Falcons", "conference":"NFC", "division": "South"},
       {"abbr":"BAL", "team":"Baltimore", "mascot": "Ravens", "conference":"AFC", "division": "North"},
@@ -34,6 +40,13 @@ window.angular.module('ngff.services.nfl', [])
       {"abbr":"TB", "team":"Tampa Bay", "mascot": "Buccaneers", "conference":"NFC", "division": "South"},
       {"abbr":"TEN", "team":"Tennessee", "mascot": "Titans", "conference":"AFC", "division": "South"},
       {"abbr":"WAS", "team":"Washington", "mascot": "Redskins", "conference":"NFC", "division": "East"}
-    ];
-    return NFL;
-  });
+    ])
+    
+    .constant('NFLPositions', [
+      {"abbr":"QB",  "pos":"Quarterback"},
+      {"abbr":"RB",  "pos":"Runningback"},
+      {"abbr":"WR",  "pos":"Wide Receiver"},
+      {"abbr":"TE",  "pos":"Tight End"},
+      {"abbr":"K",   "pos":"Kicker"},
+      {"abbr":"D/ST","pos":"Defense/Special Teams"}
+    ])
