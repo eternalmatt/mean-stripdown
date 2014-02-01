@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
   , env = process.env.NODE_ENV || 'development'
   , config = require('../../config/config')[env]
-  , Scema = mongoose.Schema
+  , Schema = mongoose.Schema
   ;
   
 var PlayerSchema = new Schema({

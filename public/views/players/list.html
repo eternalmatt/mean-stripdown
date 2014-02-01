@@ -1,5 +1,15 @@
 <div>
+    <input type="text" ng-model="search.name" placeholder="Name search">
     <positions></positions>
     <nflteams></nflteams>
     <searchlimit></searchlimit>
 </div>
+
+<table>
+    <th ng-repeat="title in ['Position','Number','Name']" ng-bind="title"></th>
+    <tr ng-repeat="player in players | filter:search | filter:strictsearch:true | limitTo:limitct">
+        <td ng-bind="player.pos"></td>
+        <td ng-bind="player.num"></td>
+        <td ng-bind="player.name"></td>
+    </tr>
+</table>

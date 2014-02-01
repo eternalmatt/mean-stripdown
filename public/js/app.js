@@ -25,5 +25,6 @@ window.angular.module('ngff.services',
 'ngff.services.global',
 'ngff.services.nfl',
 'ngff.services.leagues',
-'ngff.services.fantasyTeams'
+'ngff.services.fantasyTeams',
+'ngff.services.players'
 ]);

@@ -1,7 +1,7 @@
 var mongoose = require('mongoose')
   , async = require('async')
   , Player = mongoose.model('Player')
-  , _ = require('underscorer')
+  , _ = require('underscore')
   ;
   
 exports.show = function(req, res){
