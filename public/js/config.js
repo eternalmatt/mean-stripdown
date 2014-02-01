@@ -103,6 +103,11 @@ window.app.config(['$routeProvider', function($routeProvider) {
       save: blankObject
     }
   })
+  
+  .when('/players', {
+    templateUrl: 'views/players/list.html',
+    controller: 'PlayersController'
+  })
 
   .otherwise({
     redirectTo : '/'

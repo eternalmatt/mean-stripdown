@@ -1,0 +1,7 @@
+<select ng-model="search.pos">
+    <option value="">All positions</option>
+    <option ng-repeat="position in positions"
+        value="{{$index}}"
+        ng-bind="position.abbr">
+    </option>
+</select>
